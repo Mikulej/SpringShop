@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product,Long> {
     // Dodatkowe metody zapytań mogą być dodane tutaj
     List<Product> findAll();
 

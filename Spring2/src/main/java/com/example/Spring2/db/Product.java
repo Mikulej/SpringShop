@@ -14,6 +14,7 @@ public class Product {
     
     private String name;
     private double price;
+    private int amount;
 
     public void setName(String name) {
         this.name = name;
@@ -37,5 +38,13 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }

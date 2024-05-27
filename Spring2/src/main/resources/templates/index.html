@@ -5,7 +5,10 @@
     <title>Products</title>
 </head>
 <body>
-<h1>Products</h1>
+<h1>Spring Shop</h1>
+<h2>You are not logged in!</h2>
+
+<h2>Products</h2>
 
 <!-- Sorting and Filtering Form -->
 <form th:action="@{/}" method="get">
@@ -30,12 +33,14 @@
     <tr>
         <th>Name</th>
         <th>Price</th>
+        <th>Amount</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="product : ${products}">
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
+        <td th:text="${product.amount}"></td>
     </tr>
     </tbody>
 </table>
