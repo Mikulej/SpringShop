@@ -26,7 +26,7 @@ public class AdminController {
     public String productList(Model model) {
         List<Product> products = productRepository.findAll();
         model.addAttribute("products", products);
-        model.addAttribute("newProduct", new ProductDTO(4L,"Pizza",20));
+        model.addAttribute("newProduct", new ProductDTO(4L,"Pizza",20,1));
         return "admin";
     }
     @PostMapping("/add")
@@ -76,6 +76,6 @@ public class AdminController {
     // ...metody pomocnicze
 
     private ProductDTO convertToDto(Product product) {
-        return new ProductDTO(product.getId(), product.getName(), product.getPrice());
+        return new ProductDTO(product.getId(), product.getName(), product.getPrice(),product.getAmount());
     }
 }

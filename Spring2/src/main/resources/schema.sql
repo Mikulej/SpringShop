@@ -54,3 +54,10 @@ CREATE TABLE users (
 -- Insert default admin user with role ADMIN
 INSERT INTO users (username, password, role) VALUES
 ('admin', '$2a$10$Y2ieaxZRLMbxRkBwM8TU1ubCC3/gTF2aoFVoxWic08iMbHOXmChJW', 'ADMIN'); -- password is 'admin'
+
+CREATE TABLE IF NOT EXISTS cart (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DOUBLE NOT NULL,
+    amount INT NOT NULL
+);

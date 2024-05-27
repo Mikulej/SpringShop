@@ -2,39 +2,44 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Panel administracyjny</title>
+    <title>Admin panel</title>
 </head>
 <body>
-<h1>Panel administracyjny</h1>
+<h1>Admin panel</h1>
 
 <!-- Lista produktów -->
-<h2>Lista produktów</h2>
+<h2>Product list</h2>
 <table>
     <thead>
     <tr>
-        <th>Nazwa</th>
-        <th>Cena</th>
-        <th>Akcje</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+        <th>Amount</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="product : ${products}">
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
+        <td th:text="${product.amount}"></td>
         <td>
-            <a th:href="@{/admin/edit/{id}(id=${product.id})}">Edytuj</a>
-            <a th:href="@{/admin/delete/{id}(id=${product.id})}">Usuń</a>
+            <a th:href="@{/admin/edit/{id}(id=${product.id})}">Edit</a>
+            <a th:href="@{/admin/delete/{id}(id=${product.id})}">Delete</a>
         </td>
     </tr>
     </tbody>
 </table>
 
 <!-- Formularz dodawania nowego produktu -->
-<h2>Dodaj nowy produkt</h2>
+<h2>Add new product</h2>
 <form action="/admin/add" method="post" th:object="${newProduct}">
-    <label>Nazwa: <input type="text" th:field="*{name}" /></label><br />
-    <label>Cena: <input type="number" step="0.01" th:field="*{price}" /></label><br />
-    <button type="submit">Dodaj produkt</button>
+    <label>Name: <input type="text" th:field="*{name}" /></label><br />
+    <label>Price: <input type="number" step="0.01" th:field="*{price}" /></label><br />
+    <label>Amount: <input type="number" step="1" th:field="*{amount}" /></label><br />
+    <button type="submit">Add product</button>
 </form>
+<h2>Return to main page</h2>
+<button onclick="window.location.href='/index'">Return</button>
 </body>
 </html>
