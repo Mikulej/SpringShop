@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+<h1>Products</h1>
+
+<!-- Sorting and Filtering Form -->
+<form th:action="@{/}" method="get">
+    <label for="sortBy">Sort by:</label>
+    <select name="sortBy" id="sortBy">
+        <option value="name">Name</option>
+        <option value="price">Price</option>
+    </select>
+
+    <label for="minPrice">Min Price:</label>
+    <input type="number" name="minPrice" id="minPrice" step="0.01" />
+
+    <label for="maxPrice">Max Price:</label>
+    <input type="number" name="maxPrice" id="maxPrice" step="0.01" />
+
+    <button type="submit">Apply</button>
+</form>
+
+<!-- Product List -->
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
