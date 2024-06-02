@@ -1,14 +1,14 @@
-CREATE TABLE IF NOT EXISTS product (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    price DOUBLE NOT NULL,
-    amount INT NOT NULL
-);
-
--- Dodajemy przykładowe dane
-INSERT INTO product (name, price,amount) VALUES ('Kawa', 10.0,1);
-INSERT INTO product (name, price,amount) VALUES ('Herbata', 8.0,1);
-INSERT INTO product (name, price,amount) VALUES ('Ciastka', 15.0,1);
+--CREATE TABLE IF NOT EXISTS product (
+--    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+--    name VARCHAR(255) NOT NULL,
+--    price DOUBLE NOT NULL,
+--    amount INT NOT NULL
+--);
+--
+---- Dodajemy przykładowe dane
+--INSERT INTO product (name, price,amount) VALUES ('Kawa', 10.0,1);
+--INSERT INTO product (name, price,amount) VALUES ('Herbata', 8.0,1);
+--INSERT INTO product (name, price,amount) VALUES ('Ciastka', 15.0,1);
 -- Dodajemy przykładowe dane
 --INSERT INTO product (name, price) VALUES
 --('Schabowy', 25.00),
@@ -54,10 +54,3 @@ CREATE TABLE users (
 -- Insert default admin user with role ADMIN
 INSERT INTO users (username, password, role) VALUES
 ('admin', '$2a$10$Y2ieaxZRLMbxRkBwM8TU1ubCC3/gTF2aoFVoxWic08iMbHOXmChJW', 'ADMIN'); -- password is 'admin'
-
-CREATE TABLE IF NOT EXISTS cart (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    price DOUBLE NOT NULL,
-    amount INT NOT NULL
-);
