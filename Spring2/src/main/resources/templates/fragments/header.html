@@ -4,8 +4,11 @@
     <header th:fragment="Header">
         <div>I am header!</div>
         <span>Here's how many stuff you have in your cart!</span>
-        <span th:if="${session.cart != null}" th:text="${session.cart.size()}"></span>
-        <span th:unless="${session.cart != null}">0</span>
+<!--        <span th:if="${session.cart != null}" th:text="${session.cart.size()}"></span>-->
+<!--        <span th:unless="${session.cart != null}">0</span>-->
+        <span th:text="${@cart.amount}"></span>
+        <span th:text="${@cart.sum}"></span>
+
     </header>
 </body>
 </html>

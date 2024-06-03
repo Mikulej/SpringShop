@@ -1,5 +1,6 @@
 package com.example.Spring2.controller;
 
+import com.example.Spring2.Cart;
 import com.example.Spring2.data.ProductDTO;
 import com.example.Spring2.db.Product;
 import com.example.Spring2.db.ProductRepository;
@@ -18,10 +19,12 @@ import java.util.Optional;
 public class HomeController {
 
     private final ProductRepository productRepository;
+    private final Cart cart;
 
     @Autowired
-    public HomeController(ProductRepository productRepository) {
+    public HomeController(ProductRepository productRepository, Cart cart) {
         this.productRepository = productRepository;
+        this.cart = cart;
     }
 
     @GetMapping("/")
@@ -48,19 +51,18 @@ public class HomeController {
     }
 
     @GetMapping("/add/{productId}")
-    public String addItemToCart(@PathVariable("productId") Long productId,Model model, HttpSession session){
-        @SuppressWarnings("unchecked")
-
-        List<Product>  cart = (List<Product>)session.getAttribute("cart");
-        if(cart==null){
-            cart = new ArrayList<>();
-        }
+    public String addItemToCart(@PathVariable("productId") Long productId,Model model){
+//        @SuppressWarnings("unchecked")
+//        List<Product>  cart = (List<Product>)session.getAttribute("cart");
+//        if(cart==null){
+//            cart = new ArrayList<>();
+//        }
         Optional<Product> oProduct = productRepository.findById(productId);
         if(oProduct.isPresent()){
             Product product =  oProduct.get();
-            //check if product was in cart already, if yes increment amount, if no just add new product
-            cart.add(product);
-            session.setAttribute("cart",cart);
+            //cart.add(product);
+            cart.addProduct(product);
+            //session.setAttribute("cart",cart);
         }
         model.addAttribute("products",productRepository.findAll());
         return "index";
