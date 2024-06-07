@@ -1,9 +1,12 @@
 package com.example.Spring2.controller;
 
 import com.example.Spring2.Cart;
+import com.example.Spring2.CartProduct;
+import com.example.Spring2.ProductOperation;
 import com.example.Spring2.data.ProductDTO;
 import com.example.Spring2.db.Product;
 import com.example.Spring2.db.ProductRepository;
+import com.example.Spring2.service.CartService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -18,13 +21,10 @@ import java.util.Optional;
 @Controller
 public class HomeController {
 
-    private final ProductRepository productRepository;
-    private final Cart cart;
-
+    private final CartService cartService;
     @Autowired
-    public HomeController(ProductRepository productRepository, Cart cart) {
-        this.productRepository = productRepository;
-        this.cart = cart;
+    public HomeController(CartService cartService) {
+        this.cartService = cartService;
     }
 
     @GetMapping("/")
@@ -32,41 +32,30 @@ public class HomeController {
                         @RequestParam(value = "minPrice", required = false) Double minPrice,
                         @RequestParam(value = "maxPrice", required = false) Double maxPrice,
                         Model model) {
-        List<Product> products;
+        List<Product> products = new ArrayList<>();
 
         Sort sort = Sort.by(sortBy != null ? sortBy : "name");
 
         if (minPrice != null && maxPrice != null) {
-            products = productRepository.findByPriceBetween(minPrice, maxPrice, sort);
+            products = cartService.findByPriceBetween(minPrice,maxPrice,sort);
         } else if (minPrice != null) {
-            products = productRepository.findByPriceGreaterThan(minPrice, sort);
+            products = cartService.findByPriceGreaterThan(minPrice,sort);
         } else if (maxPrice != null) {
-            products = productRepository.findByPriceLessThan(maxPrice, sort);
+            products = cartService.findByPriceLessThan(maxPrice,sort);
         } else {
-            products = productRepository.findAll(sort);
+            products = cartService.getAllProducts(sort);
         }
-
         model.addAttribute("products", products);
         return "index";
     }
 
     @GetMapping("/add/{productId}")
     public String addItemToCart(@PathVariable("productId") Long productId,Model model){
-//        @SuppressWarnings("unchecked")
-//        List<Product>  cart = (List<Product>)session.getAttribute("cart");
-//        if(cart==null){
-//            cart = new ArrayList<>();
-//        }
-        Optional<Product> oProduct = productRepository.findById(productId);
-        if(oProduct.isPresent()){
-            Product product =  oProduct.get();
-            //cart.add(product);
-            cart.addProduct(product);
-            //session.setAttribute("cart",cart);
-        }
-        model.addAttribute("products",productRepository.findAll());
+        cartService.productOperation(productId, ProductOperation.INCREASE);
+        model.addAttribute("products",cartService.getAllProducts());
         return "index";
     }
+
     private ProductDTO convertToDto(Product product) {
         return new ProductDTO(product.getId(), product.getName(), product.getPrice(),product.getAmount());
     }

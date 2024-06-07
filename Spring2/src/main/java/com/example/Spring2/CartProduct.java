@@ -9,7 +9,7 @@ public class CartProduct {
     public CartProduct(Product product){
         this.product = product;
         this.price =product.getPrice();
-        this.amount= product.getAmount();
+        this.amount= 1;
     }
 
     public void increaseAmount(){
@@ -23,7 +23,9 @@ public class CartProduct {
         }
 
     }
-
+    public boolean idEquals(Product product){
+        return this.product.getId().equals((product.getId()));
+    }
     public void setPrice(double price) {
         this.price = price;
     }

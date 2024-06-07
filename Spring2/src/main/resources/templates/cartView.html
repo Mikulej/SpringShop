@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${#lists.size(@cart.cartProductList) == 0}">
+    <p>Your cart is empty</p>
+</div>
+<div th:unless="${#lists.size(@cart.cartProductList) == 0}">
+    <table cellspacing="0">
+        <tr>
+            <th> No.</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+        <tr th:each="cartProduct, iterStat : ${@cart.cartProductList}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${cartProduct.product.name}"></td>
+            <td><a th:href="@{'/order/decrease/' + ${cartProduct.product.id}}"> - </a><span th:text="${cartProduct.amount}"> </span><a th:href="@{'/order/increase/' + ${cartProduct.product.id}}"> +</a></td>
+            <td th:text="${cartProduct.price}"></td>
+            <td><a th:href="@{'/order/remove/' + ${cartProduct.product.id}}"> X </a></td>
+        </tr>
+    </table>
+    <a th:href="@{/order/summary}">Checkout</a>
+</div>
+<a th:href="@{/}">Return to Home</a>
+</body>
+</html>

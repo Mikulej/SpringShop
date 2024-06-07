@@ -39,7 +39,9 @@
     <label>Amount: <input type="number" step="1" th:field="*{amount}" /></label><br />
     <button type="submit">Add product</button>
 </form>
+<h2>Order Panel</h2>
+<a th:href="@{/admin/showorders}">Check Orders</a>
 <h2>Return to main page</h2>
-<button onclick="window.location.href='/index'">Return</button>
+<a th:href="@{/}">Return Home</a>
 </body>
 </html>

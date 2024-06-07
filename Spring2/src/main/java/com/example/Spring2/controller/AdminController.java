@@ -3,6 +3,8 @@ package com.example.Spring2.controller;
 import com.example.Spring2.data.ProductDTO;
 import com.example.Spring2.db.Product;
 import com.example.Spring2.db.ProductRepository;
+import com.example.Spring2.db.order.Order;
+import com.example.Spring2.db.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class AdminController {
 
     private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public AdminController(ProductRepository productRepository) {
+    public AdminController(ProductRepository productRepository,OrderRepository orderRepository) {
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     // Wyświetlanie listy produktów
@@ -72,10 +76,15 @@ public class AdminController {
         productRepository.deleteById(id);
         return "redirect:/admin/";
     }
-
+    @GetMapping("/showorders")
+    public String showOrders(Model model){
+        model.addAttribute("orderList",orderRepository.findAll());
+        return "orders";
+    }
     // ...metody pomocnicze
 
     private ProductDTO convertToDto(Product product) {
         return new ProductDTO(product.getId(), product.getName(), product.getPrice(),product.getAmount());
     }
+
 }

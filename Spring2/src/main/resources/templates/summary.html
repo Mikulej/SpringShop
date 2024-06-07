@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Summary</title>
+</head>
+<body>
+<table cellspacing="0">
+    <tr>
+        <th> No.</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    <tr th:each="cartProduct, iterStat : ${@cart.cartProductList}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${cartProduct.product.name}"></td>
+        <td></a><span th:text="${cartProduct.amount}"> </span></td>
+        <td th:text="${cartProduct.price}"></td>
+        <td><a th:href="@{'/order/remove/' + ${cartProduct.product.id}}"> X </a></td>
+    </tr>
+</table>
+<br>
+<form th:action= "@{/order/saveorder}" method="post" >
+    <label>First Name</label><br>
+    <input type="text" name="firstName" required><br>
+    <label>Last Name</label><br>
+    <input type="text" name="lastName" required><br>
+    <label>Address</label><br>
+    <input type="text" name="address" required><br>
+    <label>Post Code</label><br>
+    <input type="text" name="postCode" required><br>
+    <label>City</label><br>
+    <input type="text" name="city" required><br>
+    <button type="submit">Purchase</button>
+</form>
+</body>
+</html>

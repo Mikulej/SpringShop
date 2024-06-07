@@ -7,11 +7,11 @@
 <body>
 <h1>Spring Shop</h1>
 <header th:replace="fragments/header :: Header"></header>
-<h2>You are not logged in!</h2>
+<!--<h2>You are not logged in!</h2>-->
 <button onclick="window.location.href='/login'">Login</button>
 <button onclick="window.location.href='/register'">Register</button>
 <button onclick="window.location.href='/admin/'">Admin</button>
-<button onclick="window.location.href='/cart'">Basket</button>
+
 <h2>Products</h2>
 
 <!-- Sorting and Filtering Form -->
@@ -45,15 +45,9 @@
         <td th:text="${product.name}"></td>
         <td><span th:text="${product.price}"></span> zł</td>
         <td>x <span th:text="${product.amount}"></span></td>
-
         <td>
-<!--            <form action="/addToCart" method="post">-->
-<!--                <button type="submit">Add to cart</button>-->
-<!--            </form>-->
                 <a th:href="@{'/add/'+ ${product.id}}">Add to cart</a>
         </td>
-
-
     </tr>
     </tbody>
 </table>

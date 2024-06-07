@@ -17,9 +17,12 @@ public class DbInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception{
         ProductRepository.saveAll(List.of(
-            new Product("Ciastko",1.2,1),
-                new Product("Slodycze",5.2,2),
-                new Product("Mleko",4.4,3)
+            new Product("Ciastko",1.2,17),
+                new Product("Slodycze",5.2,21),
+                new Product("Mleko",4.4,30),
+            new Product("Jajka",4.49,44),
+                new Product("Mąka",7.81,62),
+                new Product("Cukier",2.97,54)
         ));
     }
 }
